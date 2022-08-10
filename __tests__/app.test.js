@@ -8,7 +8,7 @@ describe('oauth routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
-  it('shoulld login and redirect users to /api/v1/github/dashboard', async () => {
+  it('should login and redirect users to /api/v1/github/dashboard', async () => {
     const res = await (await request.agent(app).get('api/v1/github/callback?code=42')).redirects(1);
 
     expect(res.body).toEqual({
