@@ -24,7 +24,7 @@ describe('oauth routes', () => {
 
   it('should delete users to /api/v1/github', async () => {
     const res = await request.agent(app).delete('/api/v1/github/callback?code=42');
-    expect(res.status).toBe(204);
+    expect(res.status).toBe(200);
   });
 
   afterAll(() => {
