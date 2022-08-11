@@ -41,6 +41,17 @@ describe('oauth routes', () => {
     ]));
   });
 
+  it('should create post to /api/v1/posts', async () => {
+    await agent.post('/api/v1/github/callback?code=42');
+    const res = await agent.post('/api/v1/posts');
+    expect(res.body).toEqual(expect.arrayContaining([
+      {
+        id: expect.any(String),
+        posts: expect.any(String),
+      }
+    ]));
+  });
+
   afterAll(() => {
     pool.end();
   });
