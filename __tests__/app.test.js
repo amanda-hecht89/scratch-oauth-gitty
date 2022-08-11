@@ -42,10 +42,13 @@ describe('oauth routes', () => {
   });
 
   it('should create a new post to /api/v1/posts', async () => {
+    const newPost = { posts: 'Amanda deff knows what shes doing' };
     await agent.post('/api/v1/github/callback?code=42');
-    const res = await agent.post('/api/v1/posts');
+    const res = await agent.post('/api/v1/posts').send(newPost);
+    
     expect(res.body).toEqual(
       {
+        'id': expect.any(String),
         'posts': 'Amanda deff knows what shes doing',
       }
     );
