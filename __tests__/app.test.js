@@ -9,10 +9,9 @@ describe('oauth routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
+
   it('should login and redirect users to /api/v1/github/dashboard', async () => {
     const res = await request.agent(app).get('/api/v1/github/callback?code=42').redirects(1);
-    console.log(res);
-
     expect(res.body).toEqual({
       id: expect.any(String),
       username: 'im_not_real',
@@ -22,6 +21,12 @@ describe('oauth routes', () => {
       exp: expect.any(Number),
     });
   });
+
+  it('should delete users to /api/v1/github', async () => {
+    const res = await request.agent(app).delete('/api/v1/github/callback?code=42');
+    expect(res.status).toBe(204);
+  });
+
   afterAll(() => {
     pool.end();
   });
