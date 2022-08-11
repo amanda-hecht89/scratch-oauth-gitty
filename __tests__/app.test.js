@@ -27,6 +27,14 @@ describe('oauth routes', () => {
     expect(res.status).toBe(200);
   });
 
+  it('should create a new post', async () => {
+    const res = await request(app).post("/api/v1/posts");
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      posts,
+    });
+  });
+
   afterAll(() => {
     pool.end();
   });
